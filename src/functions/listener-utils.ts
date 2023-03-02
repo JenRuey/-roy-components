@@ -1,6 +1,6 @@
 import { make_random_id } from "./random-utils";
 
-interface ListenerType<T> {
+export interface ListenerType<T> {
   init: (eventhandler: (data: CustomEvent<T>) => void) => void;
   fire: (data: T) => void;
   unmount: () => void;

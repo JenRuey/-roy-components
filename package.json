@@ -1,6 +1,6 @@
 {
   "name": "@roy1997/components",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "scripts": {
     "build": "rollup -c",
@@ -30,11 +30,11 @@
   "dependencies": {
     "@types/styled-components": "^5.1.26",
     "bootstrap": "^5.2.3",
-    "react-bootstrap": "^2.7.2",
-    "react-icons": "^4.7.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
     "styled-components": "^5.3.7"
   },
   "files": [

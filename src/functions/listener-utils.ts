@@ -16,8 +16,10 @@ export function createListener<T>(evt?: string): ListenerType<T> {
       window.addEventListener(event, _eventhandler as (e: Event) => void, false);
     },
     fire: (data) => {
-      let customevent = new CustomEvent<T>(event, { detail: data });
-      window.dispatchEvent(customevent);
+      setTimeout(() => {
+        let customevent = new CustomEvent<T>(event, { detail: data });
+        window.dispatchEvent(customevent);
+      }, 200);
     },
     unmount: () => {
       window.removeEventListener(event, _eventhandler, false);

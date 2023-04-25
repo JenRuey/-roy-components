@@ -22,23 +22,37 @@ function storeData<T>(tbl: string, newtbl: Array<T>, toggleState?: ToggleStateTy
 export function createTable<T>(tablename: string, toggleState?: ToggleStateType): TableInterface<T> {
   type TableType = Omit<T, "key"> & CommonType;
   return {
-    add: function (data) {
+    addall: function (data) {
       let tbl = retrieveData<TableType>(tablename);
-      tbl.push({ key: generateKey(tablename), ...data });
+      for (let d of data) {
+        tbl.push({ ...d, key: generateKey(tablename) });
+      }
       storeData<TableType>(tablename, tbl, toggleState);
     },
     selectall: function () {
       let tbl = retrieveData<T>(tablename);
       return tbl;
     },
-    filter: function (attribute, filterText) {
+    filterall: function (data) {
       let tbl = retrieveData<T>(tablename);
-      return _.filter(tbl, (o) => o[attribute] === filterText);
+      return _.filter(tbl, (o) => data.some((d) => o[d.attribute] === d.text));
     },
-    delete: function (key) {
+    deleteall: function (keys) {
       let tbl = retrieveData<TableType>(tablename);
-      let newtbl = _.filter(tbl, (o) => o.key !== key);
+      let newtbl = _.filter(tbl, (o) => !keys.some((k) => o.key === k));
       storeData<TableType>(tablename, newtbl, toggleState);
+    },
+    updateitems: function (data) {
+      let tbl = retrieveData<TableType>(tablename);
+      for (let d of data) {
+        let idx = _.findIndex(tbl, (o) => o.key === d.key);
+        if (idx === -1) {
+          tbl.push({ ...d, key: generateKey(tablename) });
+        } else {
+          tbl[idx] = d;
+        }
+      }
+      storeData<TableType>(tablename, tbl, toggleState);
     },
   };
 }

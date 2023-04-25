@@ -3,12 +3,12 @@ import { Dispatch, SetStateAction } from "react";
 export type ToggleStateType = [boolean, Dispatch<SetStateAction<boolean>>];
 
 export interface TableInterface<T> {
-  add: (data: Omit<T, "key">) => void;
+  addall: (data: Array<Omit<T, "key">>) => void;
   selectall: () => Array<T>;
-  filter: (attribute: keyof T, filterText: string) => Array<T>;
-  delete: (key: string) => void;
+  filterall: (data: Array<{ attribute: keyof T; text: string }>) => Array<T>;
+  deleteall: (keys: Array<string>) => void;
+  updateitems: (data: Array<T & CommonType>) => void;
 }
-
 export interface CommonType {
   key: string;
 }
